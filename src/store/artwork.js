@@ -1,9 +1,5 @@
+import { s3 } from '../../secrets'
 const AWS = require('aws-sdk')
-const s3 = new AWS.S3({
-  accessKeyId: 'AKIAJZNABHO4OGIVVKQQ',
-  secretAccessKey: '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',
-  Bucket: 'arpaintings'
-});
 const bucketParams = {
   Bucket: 'arpaintings',
 }
