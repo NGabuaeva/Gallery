@@ -9,13 +9,13 @@ import SinglePainting from './SinglePainting'
 function Main() {
   return (
     <Router>
-    <Switch>
-      <Route exact path='/' component={Home} />
-      <Route exact path='/artwork' component={Artwork} />
-      {/* <Route path='/artwork/:id' component={SinglePainting} />
-      <Route path='/about' component={About} />
+      <Switch>
+        <Route exact path='/' component={Home} />
+        <Route exact path='/artwork' component={Artwork} />
+        <Route path='/artwork/:id' component={SinglePainting} />
+        {/* <Route path='/about' component={About} />
       <Route path='/contact' component={Contact} /> */}
-    </Switch>
+      </Switch>
     </Router>
   )
 }

@@ -1,5 +1,5 @@
-import { s3 } from '../../secrets'
-const AWS = require('aws-sdk')
+import { s3 } from '../secrets'
+
 const bucketParams = {
   Bucket: 'arpaintings',
 }
@@ -30,10 +30,12 @@ export const getArtwork = () => async dispatch => {
           }
 
           s3.getObject(params, function (err, data) {
-            paintingObj.id = idx + 1
+            console.log('data:', data)
             paintingObj.name = data.Metadata.name
             paintingObj.date = data.Metadata.date
           })
+
+          paintingObj.id = idx + 1
 
           paintingObj.url = s3.getSignedUrl('getObject', {
             Bucket: 'arpaintings',
