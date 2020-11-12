@@ -20,7 +20,8 @@ export default function Artwork() {
       const style = heights[count]
       count = count === heights.length - 1 ? 0 : count + 1
       return <Painting src={painting.url} alt={painting.name} style={style} />
-    }) : 'Something went wrong, try again'}
+    }) : ''}
+    <div width='20vw'></div>
   </PaintingWrapper>
 }
 
@@ -31,7 +32,13 @@ flex-direction: row;
 overflow-y: hidden;
 overflow-x: auto;
 height: 80vh;
-margin: 10vh 0vw 10vh 10vw
+padding: 10vh 10vw 10vh 30vw;
+> * {
+  &:last-child {
+  margin-right: 20;
+  background-color: black;
+}
+}
 `
 
 const Painting = styled.img`
