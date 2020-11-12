@@ -1,16 +1,18 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 export function useHorizontalScroll() {
-  console.log('got to the hook')
-  const elRef = useRef();
+  const elRef = useRef(null);
+  const [yMovement, setYMovement] = useState(0)
   useEffect(() => {
     const el = elRef.current;
     if (el) {
       const onWheel = e => {
-        e.preventDefault();
+        if (e.deltaY !== yMovement) {
+          e.preventDefault();
+          setYMovement(e.deltaY)
+        }
         el.scrollTo({
           left: el.scrollLeft + e.deltaY,
-          behavior: "smooth"
         });
       };
       el.addEventListener("wheel", onWheel);

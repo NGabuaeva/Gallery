@@ -24,7 +24,6 @@ const gotAllArtwork = (artwork) => ({
 
 export const getArtwork = () => async dispatch => {
   try {
-    console.log('in store')
     await s3.listObjectsV2(bucketParams, function (err, data) {
       if (err) {
         console.log('Error:', err)
@@ -39,7 +38,6 @@ export const getArtwork = () => async dispatch => {
           }
 
           s3.getObject(params, function (err, data) {
-            console.log('data:', data)
             paintingObj.name = data.Metadata.name
             paintingObj.date = data.Metadata.date
           })

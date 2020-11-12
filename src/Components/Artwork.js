@@ -8,7 +8,7 @@ import { useHorizontalScroll } from "./hooks";
 const heights = [{ height: '70%', alignSelf: 'center' }, { height: '40%', alignSelf: 'start', top: '10vh' }, { height: '60%', alignSelf: 'center' }, { height: '50%', alignSelf: 'center', marginBottom: '20vh' }, { height: '50%', alignSelf: 'flex-end', bottom: '10vh' }, { height: '40%', alignSelf: 'start', top: '20vh' }, { height: '70%', alignSelf: 'center' }, { height: '60%', alignSelf: 'center' }]
 
 export default function Artwork() {
-  const scrollRef = useHorizontalScroll
+  const scrollRef = useHorizontalScroll()
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getArtwork())
