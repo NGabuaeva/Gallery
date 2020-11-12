@@ -3,18 +3,23 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getArtwork } from '../store/artwork'
 import styled from 'styled-components'
+import { useHorizontalScroll } from "./hooks";
+
+const heights = [{ height: '70%', alignSelf: 'center' }, { height: '40%', alignSelf: 'start', top: '10vh' }, { height: '60%', alignSelf: 'center' }, { height: '50%', alignSelf: 'center', marginBottom: '20vh' }, { height: '50%', alignSelf: 'flex-end', bottom: '10vh' }, { height: '40%', alignSelf: 'start', top: '20vh' }, { height: '70%', alignSelf: 'center' }, { height: '60%', alignSelf: 'center' }]
 
 export default function Artwork() {
+  const scrollRef = useHorizontalScroll
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getArtwork())
   }, [])
+  let count = 0
   const artwork = useSelector(state => state.artwork)
-  return <PaintingWrapper>
+  return <PaintingWrapper ref={scrollRef}>
     {artwork.length ? artwork.map(painting => {
-      return <Link to={`/artwork/${painting.id}`}>
-        <Painting src={painting.url} alt={painting.name} />
-      </Link>
+      const style = heights[count]
+      count = count === heights.length - 1 ? 0 : count + 1
+      return <Painting src={painting.url} alt={painting.name} style={style} />
     }) : 'Something went wrong, try again'}
   </PaintingWrapper>
 }
@@ -24,10 +29,20 @@ const PaintingWrapper = styled.div`
 display: flex;
 flex-direction: row;
 overflow-y: hidden;
-overflow-x: scroll;
-max-height: 100%
+overflow-x: auto;
+height: 80vh;
+margin: 10vh 0vw 10vh 10vw
 `
 
 const Painting = styled.img`
-padding: 20px
+position: relative;
+margin-right: 10vw;
+margin-left: 5vw;
+border: 1.5rem solid #fff;
+outline: 1.7rem ridge #f5f9ffd6;
+box-shadow: 1rem 1.5rem 2rem 1.5rem #0000009c;
+&:hover {
+  transform: scale(1.05) ;
+  z-index: 20;
+}
 `

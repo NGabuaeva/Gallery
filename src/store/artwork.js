@@ -4,6 +4,15 @@ const bucketParams = {
   Bucket: 'arpaintings',
 }
 
+function shufflePaintings(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * i)
+    const temp = array[i]
+    array[i] = array[j]
+    array[j] = temp
+  }
+  return array
+}
 
 const GOT_ALL_ARTWORK = 'GOT_ALL_ARTWORK'
 
@@ -46,7 +55,7 @@ export const getArtwork = () => async dispatch => {
           allPaintings.push(paintingObj)
         })
 
-        dispatch(gotAllArtwork(allPaintings))
+        dispatch(gotAllArtwork(shufflePaintings(allPaintings)))
       }
     })
   } catch (error) {
