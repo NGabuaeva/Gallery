@@ -1,14 +1,23 @@
 import React from 'react'
-import { useParams } from "react-router"
-import { useSelector } from 'react-redux'
+import styled from 'styled-components'
 
-export default function SinglePainting() {
-  const { id } = useParams()
-  const artwork = useSelector(state => state.artwork)
-  const painting = artwork[id - 1]
+export default function SinglePainting(props) {
+  const painting = props.painting
+  console.log('in single painting')
   return (
     <div>
-      {/* <img src={painting.url} alt={painting.name} /> */}
+      <SelectedPainting src={painting.url} alt={painting.name} />
     </div>
   )
 }
+
+
+const SelectedPainting = styled.img`
+position: relative;
+margin-right: 10vw;
+margin-left: 5vw;
+border: 1.5rem solid #fff;
+outline: 1.7rem ridge #f5f9ffd6;
+box-shadow: 1rem 1.5rem 2rem 1.5rem #0000009c;
+height: 80vh;
+`

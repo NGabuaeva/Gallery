@@ -30,8 +30,13 @@ router.get('/', async (req, res, next) => {
           }
 
           s3.getObject(params, function (err, data) {
-            paintingObj.name = data.Metadata.name
-            paintingObj.date = data.Metadata.date
+            try {
+              paintingObj.name = data.Metadata.name
+              paintingObj.date = data.Metadata.date
+            } catch (error) {
+              console.log(error)
+            }
+
           })
 
           paintingObj.id = idx + 1
